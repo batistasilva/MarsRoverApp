@@ -4,11 +4,13 @@ import com.example.mainrover.db.MarsRoverSavedPhotoDao
 import com.example.mainrover.domain.model.RoverPhotoUiModel
 import com.example.mainrover.domain.model.RoverPhotoUiState
 import com.example.mainrover.domain.model.toDbModel
+import com.example.mainrover.domain.model.toUiModel
 import com.example.mainrover.service.MarsRoverPhotoService
 import com.example.mainrover.service.model.RoverPhotoRemoteModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class MarsRoverPhotoRepo @Inject constructor(
@@ -59,4 +61,9 @@ class MarsRoverPhotoRepo @Inject constructor(
     suspend fun removePhoto(roverPhotoUiModel: RoverPhotoUiModel){
         marsRoverSavedPhotoDao.delete(toDbModel(roverPhotoUiModel))
     }
+
+    fun getAllSaved(): Flow<RoverPhotoUiState> =
+        marsRoverSavedPhotoDao.getAllSaved().map { localModel ->
+            RoverPhotoUiState.Success(toUiModel(localModel))
+        }
 }
