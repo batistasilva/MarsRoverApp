@@ -1,4 +1,4 @@
-package com.example.mainrover.ui.photolist
+package com.example.mainrover.ui.savedlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,24 +9,23 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MarsRoverPhotoViewModel @Inject constructor(
+class MarsRoverSavedViewModel @Inject constructor(
     private val marsRoverPhotoRepo: MarsRoverPhotoRepo
-) : ViewModel() {
+): ViewModel(){
 
-    private val _roverPhotoUiState: MutableStateFlow<RoverPhotoUiState> =
+    private val _marsPhotoUiSavedState: MutableStateFlow<RoverPhotoUiState> =
         MutableStateFlow(RoverPhotoUiState.Loading)
-    val roverPhotoUiState: StateFlow<RoverPhotoUiState> get() = _roverPhotoUiState
+    val marsPhotoUiSavedState: StateFlow<RoverPhotoUiState>
+        get() = _marsPhotoUiSavedState
 
-    fun getMarsRoverPhoto(roverName: String, sol: String) {
-        viewModelScope.launch {
-            _roverPhotoUiState.value = RoverPhotoUiState.Loading
-            marsRoverPhotoRepo.getMarsRoverPhoto(roverName, sol).collect {
-                _roverPhotoUiState.value = it
+    fun getAllSaved(){
+        viewModelScope.launch(Dispatchers.IO){
+            marsRoverPhotoRepo.getAllSaved().collect{
+                _marsPhotoUiSavedState.value = it
             }
         }
     }
