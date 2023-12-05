@@ -24,16 +24,18 @@ fun ManifestList(
     modifier: Modifier,
     roverManifestUiModelList: List<RoverManifestUiModel>,
     roverName: String,
-    onClick:(roverName: String, sol: String) -> Unit
-){
+    onClick: (roverName: String, sol: String) -> Unit
+) {
     Surface(color = MaterialTheme.colorScheme.background, modifier = modifier.fillMaxSize()) {
-       LazyColumn{
-           items(count = roverManifestUiModelList.size, itemContent = {index ->  
-               Manifest(roverManifestUiModel = roverManifestUiModelList[index],
-               roverName,
-               onClick)
-           })
-       }
+        LazyColumn {
+            items(count = roverManifestUiModelList.size, itemContent = { index ->
+                Manifest(
+                    roverManifestUiModel = roverManifestUiModelList[index],
+                    roverName,
+                    onClick
+                )
+            })
+        }
     }
 }
 
@@ -41,7 +43,7 @@ fun ManifestList(
 fun Manifest(
     roverManifestUiModel: RoverManifestUiModel,
     roverName: String,
-    onClick:(roverName: String, sol: String) -> Unit
+    onClick: (roverName: String, sol: String) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -54,21 +56,33 @@ fun Manifest(
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
-            Text(text = stringResource(id = R.string.sol, roverManifestUiModel.sol))
-            Text(text = stringResource(id = R.string.earth_date, roverManifestUiModel.earthDate))
-            Text(text = stringResource(id = R.string.number_of_photo ,roverManifestUiModel.photoNumber))
+            Text(
+                text = stringResource(id = R.string.sol, roverManifestUiModel.sol),
+                style = MaterialTheme.typography.titleMedium
+            )
+            Text(
+                text = stringResource(id = R.string.earth_date, roverManifestUiModel.earthDate),
+                style = MaterialTheme.typography.bodySmall
+            )
+            Text(
+                text = stringResource(
+                    id = R.string.number_of_photo,
+                    roverManifestUiModel.photoNumber
+                ), style = MaterialTheme.typography.bodySmall
+            )
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun ManifestPreview(){
+fun ManifestPreview() {
     Manifest(roverManifestUiModel = RoverManifestUiModel(
         sol = "4",
         earthDate = "2021-03-05",
-        photoNumber = "34"),
+        photoNumber = "34"
+    ),
         roverName = "",
-        onClick = {_,_ ->}
+        onClick = { _, _ -> }
     )
 }
