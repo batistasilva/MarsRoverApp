@@ -10,4 +10,4 @@ fun toUiModel(roverManifestRemoteModel: RoverManifestRemoteModel) : RoverManifes
         earthDate = photo.earthDate,
         photoNumber = photo.totalPhotos.toString()
     )
-}.sorted())
+})

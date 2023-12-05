@@ -28,6 +28,12 @@ class RoverManifestConvertorTest {
                         earthDate = "2021-02-18",
                         sol = 0,
                         totalPhotos = 54
+                    ),
+                    ManifestPhotoRemoteModel(
+                        cameras = listOf("EDL_DDCAM","EDL_PUCAM2"),
+                        earthDate = "2021-02-19",
+                        sol = 1,
+                        totalPhotos = 201
                     )
                 ),
                 status = "active",
@@ -45,6 +51,11 @@ class RoverManifestConvertorTest {
                     sol = "0",
                     earthDate = "2021-02-18",
                     photoNumber = "54"
+                ),
+                RoverManifestUiModel(
+                    sol = "1",
+                    earthDate = "2021-02-19",
+                    photoNumber = "201"
                 )
             )
         )
