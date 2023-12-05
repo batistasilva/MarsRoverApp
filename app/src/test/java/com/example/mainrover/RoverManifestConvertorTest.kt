@@ -48,14 +48,14 @@ class RoverManifestConvertorTest {
         val expectedResult = RoverManifestUiState.Success(
             listOf(
                 RoverManifestUiModel(
-                    sol = "0",
-                    earthDate = "2021-02-18",
-                    photoNumber = "54"
-                ),
-                RoverManifestUiModel(
                     sol = "1",
                     earthDate = "2021-02-19",
                     photoNumber = "201"
+                ),
+                RoverManifestUiModel(
+                    sol = "0",
+                    earthDate = "2021-02-18",
+                    photoNumber = "54"
                 )
             )
         )
